@@ -3,32 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <title>Restaurant Home</title>
+    <link rel="stylesheet" href="{{ asset('assets/css/home.css') }}">
 </head>
 <body>
 
-    <div class="container mt-5">
-        <h2 class="text-center mb-4">Our Menu</h2>
+    <header>
+        <strong>Restaurant</strong>
 
-        <div class="row">
-            @foreach($meals as $meal)
-                <div class="col-md-3 mb-4">
-                    <div class="card shadow-sm">
-                        <img src="{{ asset('images/meals/' . $meal->image) }}"
-                             class="card-img-top"
-                             style="height:170px; object-fit:cover;"
-                             alt="{{ $meal->name }}">
-                        <div class="card-body text-center">
-                            <h6 class="card-title">{{ $meal->name }}</h6>
-                            <p class="text-muted mb-1">{{ number_format($meal->price, 2) }} EGP</p>
-                            <button class="btn btn-dark btn-sm">Order Now</button>
-                        </div>
-                    </div>
-                </div>
-            @endforeach
+        <div>
+            @guest
+                <a href="{{ route('login') }}">Login</a>
+                <a href="{{ route('register') }}">Sign Up</a>
+            @else
+                <span>Hello, {{ Auth::user()->name }}</span>
+                <form action="{{ route('logout') }}" method="POST" style="display:inline;">
+                    @csrf
+                    <button title="Logout">🔓</button>
+                </form>
+            @endguest
         </div>
+    </header>
 
+    <h2 class="welcome">Our Menu</h2>
+
+    <div class="meals-container">
+        @foreach ($meals as $meal)
+            <div class="meal-card">
+                <img src="{{ asset('images/meals/' . $meal->image) }}" alt="{{ $meal->name }}">
+                <h4>{{ $meal->name }}</h4>
+                <p>{{ number_format($meal->price, 2) }} EGP</p>
+
+                <a class="btn-view" href="/meal/{{ $meal->id }}">View</a>
+
+                <form action="/cart/add/{{ $meal->id }}" method="POST">
+                    @csrf
+                    <button class="btn-cart">Add to Cart</button>
+                </form>
+            </div>
+        @endforeach
     </div>
 
 </body>
