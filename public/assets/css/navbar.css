@@ -1,0 +1,70 @@
+body {
+    font-family:'Poppins', sans-serif;
+    margin: 0;
+    background-color: #d5d5d5; 
+}
+
+.navbar {
+    font-family: "Playfair Display", serif;
+    font-weight: 700;
+    font-style: normal;
+    background-color: #1c1b1b; 
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    z-index: 1000;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+
+}
+
+a {
+    text-decoration: none !important;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 15px; 
+}
+
+.navbar-container {
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 10vw;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-family:'Cinzel', serif; 
+    font-weight: 700;
+    font-size: 29px; 
+    color: #D4AF37; 
+    margin-right: 200px; 
+    letter-spacing: 2px;
+  
+}
+
+
+.nav-links a {
+    margin-left: 20px;
+    color: #fff0dc; 
+    font-size: 16px;
+    font-weight: 500;
+    border-bottom: none;
+    text-decoration: none !important;
+}
+
+.nav-links a:hover {
+    color: #D4AF37; 
+}
+
+.cart i {
+    color: #D4AF37; 
+    font-size: 18px;
+}

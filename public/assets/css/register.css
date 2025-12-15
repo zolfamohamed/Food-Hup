@@ -1,3 +1,73 @@
-.container{
-    background-color: blue;
+body {
+    font-family: 'Playfair Display', serif;
+    background-color: #fff2eb;
+}
+
+.register-container {
+    width: 400px;
+    margin: 50px auto;
+    background-color: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+h1 {
+    color: #C9A274;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.label {
+    color: #C9A274;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-bottom: 2px solid #ccc;
+    outline: none;
+    background-color: transparent;
+    margin-bottom: 20px;
+    transition: border-color 0.3s;
+}
+
+.input:focus {
+    border-bottom: 2px solid #C9A274;
+}
+
+.btn-register {
+    background-color: #C9A274;
+    color: white;
+    padding: 12px;
+    width: 100%;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-register:hover {
+    background-color: #4d3a24;
+}
+
+.signin-link {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.signin-link a {
+    color: #C9A274;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.signin-link a:hover {
+    text-decoration: underline;
 }
