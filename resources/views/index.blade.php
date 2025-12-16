@@ -27,11 +27,13 @@
 
 
                 <div class="nav-links">
-                    <a href="#">Product</a>
-                    <a href="#">About</a>
-                   
+                    <a href="#menu">Menu</a>
 
-                    <a href="#"><i class="fa-solid fa-basket-shopping" style="color: #C9A274; font-size: 24px;"></i></a>
+
+                    <a href="{{ route('cart.show') }}">
+                        <i class="fa-solid fa-basket-shopping" style="color: #C9A274; font-size: 24px;"></i>
+                    </a>
+
 
                     @auth
                         <form action="{{ route('logout') }}" method="POST">
@@ -65,7 +67,7 @@
 
 
 
-    <div class="meals-container">
+    <div id="menu" class="meals-container">
         @foreach ($meals as $meal)
             <div class="meal-card">
                 <img src="{{ asset('images/meals/' . $meal->image) }}" alt="{{ $meal->name }}">

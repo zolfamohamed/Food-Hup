@@ -82,8 +82,8 @@ header a, header form button {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    filter: blur(8px); 
-    transform: scale(1.1); 
+    filter: blur(8px);
+    transform: scale(1.1);
 }
 
 
@@ -132,13 +132,13 @@ header a, header form button {
 
 .meals-container {
     display: grid;
-    gap: 40px; 
+    gap: 40px;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 }
 .meal-card img {
     width: 100%;
-    height: 200px; 
-    object-fit: cover; 
+    height: 200px;
+    object-fit: cover;
     border-radius: 10px;
 }
 
@@ -222,4 +222,3 @@ header a, header form button {
     background: #1c1b1b;
     color: #ddd;
 }
-
