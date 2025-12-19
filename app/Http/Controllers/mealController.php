@@ -16,42 +16,40 @@ class MealController extends Controller
 
     public function show($mealId)
     {
-        $meal = Meal::findOrFail($mealId);
-        return view('meals.show', compact('meal'));
+
     }
 
     public function create()
     {
-        return view('meals.create');
+        return view('addpage');
     }
 
     public function store(Request $request)
     {
         $data = $request->validate([
             'name' => 'required|string',
-            'description' => 'nullable|string',
+            'description' => 'required|nullable|string',
             'price' => 'required|numeric',
             'image' => 'required|image|max:2048',
         ]);
 
         if ($request->hasFile('image')) {
-            $data['image'] = $request->file('image')->store('images', 'public');
+            $data['image'] = $request->file('image')->store('images/meals', 'public');
         }
 
         Meal::create($data);
 
-        return redirect()->route('meals.index')->with('success', 'Meal Added');
+        return redirect()->route("adminpage")->with('success', 'Meal Added');
     }
 
-    public function edit($mealId)
+    public function edit(Meal $meal)
     {
-        $meal = Meal::findOrFail($mealId);
-        return view('meals.edit', compact('meal'));
+        return view('updatepage', compact('meal'));
     }
 
-    public function update(Request $request, $mealId)
+    public function update(Request $request, Meal $meal)
     {
-        $meal = Meal::findOrFail($mealId);
+
 
         $data = $request->validate([
             'name' => 'nullable|string',
@@ -61,17 +59,17 @@ class MealController extends Controller
         ]);
 
         if ($request->hasFile('image')) {
-            $data['image'] = $request->file('image')->store('images', 'public');
+            $data['image'] = $request->file('image')->store('images/meals', 'public');
         }
 
         $meal->update($data);
 
-        return redirect()->route('meals.index')->with('success', 'Meal Updated');
+        return redirect()->route('adminpage')->with('success', 'Meal Updated');
     }
 
     public function destroy(Meal $meal)
     {
         $meal->delete();
-        return redirect()->route('meals.index')->with('success', 'Meal Deleted');
+        return redirect()->route('adminpage')->with('success', 'Meal Deleted');
     }
 }

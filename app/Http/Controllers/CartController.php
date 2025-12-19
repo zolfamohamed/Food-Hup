@@ -2,65 +2,75 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\Meal;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
+
     public function show()
     {
-        $cart = session()->get('cart', []);
+        session(['from_index' => true]);
+        $cart = Cart::where('user_id', Auth::id())->get();
         return view('cart', compact('cart'));
+
     }
 
-    public function add($id)
+    public function add($mealid)
     {
-        $meal = Meal::findOrFail($id);
-        $cart = session()->get('cart', []);
 
-        if (isset($cart[$id])) {
-            $cart[$id]['quantity']++;
+        $item = Cart::where('user_id', Auth::id())->where("meal_id",$mealid)->first();;
+        if ($item) {
+                $item->increment('quantity');
         } else {
-            $cart[$id] = [
-                'name' => $meal->name,
-                'price' => $meal->price,
-                'image' => $meal->image,
-                'quantity' => 1
-            ];
+            Cart::create([
+                'user_id' => Auth::id(),
+                'meal_id' => $mealid,
+                'quantity' => 1,
+            ]);
         }
 
-        session()->put('cart', $cart);
-        return redirect()->route('cart.show');
-    }
-
-    public function increase($id)
-    {
-        $cart = session()->get('cart', []);
-        $cart[$id]['quantity']++;
-        session()->put('cart', $cart);
         return redirect()->back();
     }
 
-    public function decrease($id)
+    public function increase($cartid)
     {
-    $cart = session()->get('cart', []);
-    if (isset($cart[$id])) {
-        if ($cart[$id]['quantity'] > 1) {
-            $cart[$id]['quantity']--;
-        } else  {
-            unset($cart[$id]);
+        $item = Cart::where('id', $cartid)
+            ->where('user_id', Auth::id())
+            ->firstOrFail();
+           $item->increment('quantity');
+        return redirect()->route("cart.show");
+    }
+
+    public function decrease($cartid)
+    {
+        $item = Cart::where('user_id', Auth::id())->where("id",$cartid)->firstOrFail();
+
+         $item->quantity--;
+        if($item->quantity>0)
+        {
+            $item->decrement('quantity');
         }
-        session()->put('cart', $cart);
-    }
-    return redirect()->back();
+        else
+        {
+            $item->delete();
+        }
+        return redirect()->route("cart.show");
     }
 
 
-    public function remove($id)
+    public function remove($cartid)
     {
-        $cart = session()->get('cart', []);
-        unset($cart[$id]);
-        session()->put('cart', $cart);
-        return redirect()->back();
+        $item = Cart::where('user_id', Auth::id())->where("id",$cartid)->firstOrFail();
+        $item->delete();
+        return redirect()->route("cart.show");
+    }
+    public function checkout()
+    {
+        $cart = Cart::where('user_id', Auth::id())->delete();
+
+        return redirect()->route("index") ->with("success", "checkout successful");
     }
 }

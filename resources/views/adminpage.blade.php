@@ -27,12 +27,11 @@
 
 
                 <div class="nav-links">
-                    <a href="#menu">Menu</a>
+                    <a href="{{route("adminpage")}}">Menu</a>
+                     <a href="{{ route('additem') }}">Add Item</a>
 
 
-                    <a href="{{ route('cart.show') }}">
-                        <i class="fa-solid fa-basket-shopping" style="color: #C9A274; font-size: 24px;"></i>
-                    </a>
+
 
 
                     @auth
@@ -42,32 +41,19 @@
                                 <i class="fa-solid fa-right-from-bracket"></i>
                             </button>
                         </form>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-                        <a href="{{ route('register') }}">Sign Up</a>
+
                     @endauth
                 </div>
             </div>
         </nav>
     </div>
-            @if (session('success'))
+        @if (session('success'))
     <div class="alert alert-success">
         {{ session('success') }}
     </div>
     @endif
 
 
-
-
-    <section class="hero">
-        <div class="hero-overlay">
-            <img src="{{ asset('images/hero/r2.jpg') }}" alt="">
-        </div>
-        <div class="hero-content">
-            <h1>Luméra Restaurant</h1>
-            <p>Fresh flavors · Elegant taste · Made with love</p>
-        </div>
-    </section>
 
 
 
@@ -82,9 +68,14 @@
 
                 <h6>{{ $meal->description }}</h6>
 
-                <form action="/cart/add/{{ $meal->id }}" method="POST">
+                <form action="{{ route('edititem', $meal->id) }}" method="GET">
                     @csrf
-                    <button class="btn-cart">Add to Cart</button>
+                    <button class="btn-edit" type="submit">Edit Item</button>
+                </form>
+                   <form action="{{ route('deleteitem', $meal->id) }}"  method="post">
+                    @method('delete')
+                    @csrf
+                    <button class="btn-delete" type="submit">Delete Item</button>
                 </form>
             </div>
         @endforeach
