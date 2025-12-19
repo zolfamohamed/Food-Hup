@@ -27,7 +27,7 @@
     <div class="cont">
         <nav class="navbar">
             <div class="navbar-container">
-                <h3 class="logo">Luméra</h3>
+                <h3 class="logo">NEXUS</h3>
 
 
                 <div class="nav-links">

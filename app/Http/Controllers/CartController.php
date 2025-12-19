@@ -32,7 +32,7 @@ class CartController extends Controller
             ]);
         }
 
-        return redirect()->back();
+        return redirect()->back()->with("success", "item added successfully");
     }
 
     public function increase($cartid)
