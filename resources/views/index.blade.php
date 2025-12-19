@@ -23,7 +23,7 @@
     <div class="cont">
         <nav class="navbar">
             <div class="navbar-container">
-                <h3 class="logo">Luméra</h3>
+                <h3 class="logo">NEXUS</h3>
 
 
                 <div class="nav-links">
@@ -50,11 +50,20 @@
             </div>
         </nav>
     </div>
-            @if (session('success'))
-    <div class="alert alert-success">
+@if (session('success'))
+    <div id="success-message" class="alert alert-success">
         {{ session('success') }}
     </div>
-    @endif
+
+    <script>
+        setTimeout(() => {
+            const msg = document.getElementById('success-message');
+            if (msg) {
+                msg.style.display = 'none';
+            }
+        }, 3000); // 3000ms = 3 seconds
+    </script>
+@endif
 
 
 
@@ -64,7 +73,7 @@
             <img src="{{ asset('images/hero/r2.jpg') }}" alt="">
         </div>
         <div class="hero-content">
-            <h1>Luméra Restaurant</h1>
+            <h1>NEXUS</h1>
             <p>Fresh flavors · Elegant taste · Made with love</p>
         </div>
     </section>
