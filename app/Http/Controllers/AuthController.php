@@ -14,23 +14,32 @@ class AuthController extends Controller
         return view('auth.login');
     }
 
-    public function login(Request $request)
-    {
-    $request->validate([
+ public function login(Request $request)
+{
+    $credentials = $request->validate([
         'email' => 'required|email',
-        'password' => 'required'
-    ], [
-        'email.required' => 'Email is required',
-        'email.email' => 'Email format invalid',
-        'password.required' => 'Password is required'
+        'password' => 'required',
     ]);
 
-    if (Auth::attempt($request->only('email', 'password'))) {
-        return redirect('/')->with('success', 'Welcome back!');
+    if (Auth::attempt($credentials)) {
+        $request->session()->regenerate();
+
+        if (Auth::user()->is_admin == 1) {
+             $user = User::where('email', $credentials['email'])->first();
+            Auth::login($user);
+            return redirect()->intended('/adminpage')
+                ->with('success', 'Welcome, Admin '. $user["name"]);
+        }
+           $user = User::where('email', $credentials['email'])->first();
+            Auth::login($user);
+        return redirect()->intended('/')->with("success", "welcome, " . $user["name"]);
+
     }
 
-    return back()->withErrors(['email' => 'Invalid credentials'])->onlyInput('email');
-    }
+    return back()->withErrors([
+        'email' => 'Invalid email or password',
+    ]);
+}
 
 
     public function showRegister()
