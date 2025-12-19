@@ -52,7 +52,15 @@ class AuthController extends Controller
     $request->validate([
         'name' => 'required|min:3',
         'email' => 'required|email|unique:users,email',
-        'password' => 'required|min:6'
+        'password' => [
+            'required',
+            'string',
+            'min:8',
+            'regex:/[a-z]/',
+            'regex:/[A-Z]/',
+            'regex:/[0-9]/',
+            'regex:/[@$!%*#?&]/',
+        ],
     ], [
         'name.required' => 'Please enter your name',
         'name.min' => 'Name must be at least 3 characters',
@@ -60,7 +68,8 @@ class AuthController extends Controller
         'email.email' => 'Email format is not correct',
         'email.unique' => 'Email already exists, try another',
         'password.required' => 'Password is required',
-        'password.min' => 'Password must be at least 6 characters'
+        'password.min' => 'Password must be at least 6 characters',
+        'password.regex' => 'Password must contain uppercase, lowercase, number, and special character'
     ]);
 
     User::create([
@@ -75,6 +84,6 @@ class AuthController extends Controller
     public function logout()
     {
         Auth::logout();
-        return redirect('/login');
+        return redirect('/');
     }
 }

@@ -179,6 +179,9 @@ header a, header form button {
     font-weight: 600;
     color: white;
 }
+h6{
+    color: white;
+}
 
 .meal-card p {
     color: white;
