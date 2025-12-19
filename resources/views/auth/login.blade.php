@@ -8,10 +8,19 @@
 
 </head>
 <body>
-            @if (session('success'))
-    <div class="alert alert-success text-center">
+@if (session('success'))
+    <div id="success-message" class="alert alert-success text-center">
         {{ session('success') }}
     </div>
+
+    <script>
+        setTimeout(() => {
+            const msg = document.getElementById('success-message');
+            if (msg) {
+                msg.style.display = 'none';
+            }
+        }, 2000);
+    </script>
     @endif
 
 
@@ -30,7 +39,7 @@
             @endif
 
             <label for="email" class="label">Email</label>
-            <input type="text" placeholder="Enter Email" name="email" id="email" class="input" required value="{{ old('email') }}">
+            <input type="email" placeholder="Enter Email" name="email" id="email" class="input" required value="{{ old('email') }}">
 
             <label for="password" class="label">Password</label>
             <input type="password" name="password" placeholder="Password" class="input" required>

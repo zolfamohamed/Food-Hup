@@ -24,7 +24,8 @@
 
     <div class="cart-card">
 
-        <img src="{{ asset('images/meals/' . $item->meal->image) }}">
+       
+        <img src="{{ asset('storage/' . $item->meal->image) }}" alt="{{ $item->meal->name }}">
 
         <div class="cart-info">
             <h3>{{ $item->meal->name }}</h3>
