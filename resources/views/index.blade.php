@@ -42,6 +42,7 @@
                                 <i class="fa-solid fa-right-from-bracket"></i>
                             </button>
                         </form>
+                          <span style="color:#fff0dc; ">Welcome, {{ auth()->user()->name }}</span>
                     @else
                         <a href="{{ route('login') }}">Login</a>
                         <a href="{{ route('register') }}">Sign Up</a>
