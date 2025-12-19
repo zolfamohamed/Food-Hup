@@ -48,7 +48,7 @@
         </nav>
     </div>
 @if (session('success'))
-    <div id="success-message" class="alert alert-success">
+    <div id="success-message" class="alert alert-success text-center">
         {{ session('success') }}
     </div>
 
