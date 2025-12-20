@@ -28,11 +28,11 @@ class AuthController extends Controller
              $user = User::where('email', $credentials['email'])->first();
             Auth::login($user);
             return redirect()->intended('/adminpage')
-                ->with('success', 'Welcome, Admin '. $user["name"]);
+                ->with('success', 'login successful - Welcome, Admin '. $user["name"]);
         }
            $user = User::where('email', $credentials['email'])->first();
             Auth::login($user);
-        return redirect()->intended('/')->with("success", "welcome, " . $user["name"]);
+        return redirect()->intended('/')->with("success", "login successful - welcome, " . $user["name"]);
 
     }
 
@@ -68,7 +68,7 @@ class AuthController extends Controller
         'email.email' => 'Email format is not correct',
         'email.unique' => 'Email already exists, try another',
         'password.required' => 'Password is required',
-        'password.min' => 'Password must be at least 6 characters',
+        'password.min' => 'Password must be at least 8 characters',
         'password.regex' => 'Password must contain uppercase, lowercase, number, and special character'
     ]);
 
