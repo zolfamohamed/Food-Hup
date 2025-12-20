@@ -27,7 +27,7 @@
 
 
                 <div class="nav-links">
-                    <a href="#menu">Menu</a>
+                    <a href="{{route("index")}}">Menu</a>
 
 
                     <a href="{{ route('cart.show') }}">

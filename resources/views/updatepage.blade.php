@@ -37,16 +37,16 @@
 
 
 
-                    @auth
-                        <form action="{{ route('logout') }}" method="POST">
-                            @method('PUT')
-                            @csrf
-                            <button type="submit">
-                                <i class="fa-solid fa-right-from-bracket"></i>
-                            </button>
-                        </form>
+@auth
+    <form id="logout-form" action="{{ route('logout') }}" method="POST">
+        @csrf
+        <button type="submit" form="logout-form">
+            <i class="fa-solid fa-right-from-bracket"></i>
+        </button>
+    </form>
 
-                    @endauth
+    <span style="color:#fff0dc;">Welcome, {{ auth()->user()->name }}</span>
+@endauth
                 </div>
             </div>
         </nav>

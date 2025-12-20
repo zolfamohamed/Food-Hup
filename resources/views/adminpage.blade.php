@@ -34,6 +34,7 @@
 
 
 
+
                     @auth
                         <form action="{{ route('logout') }}" method="POST">
                             @csrf
@@ -41,7 +42,7 @@
                                 <i class="fa-solid fa-right-from-bracket"></i>
                             </button>
                         </form>
-
+                         <span style="color:#fff0dc; ">Welcome, {{ auth()->user()->name }}</span>
                     @endauth
                 </div>
             </div>
