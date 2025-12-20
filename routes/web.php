@@ -5,19 +5,30 @@ use App\Models\Meal;
 use Illuminate\Http\Request;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\MealController;
+use Illuminate\Support\Facades\Auth;
+
 
 Route::get('/', function () {
-    // return view('welcome');
+    if (!Auth::check() || Auth::user()->is_admin = 1) {
+        return redirect('/adminpage');
+    }
      $meals = Meal::all();
     return view('index', compact('meals'));
 
 })->name("index");
-Route::get('/adminpage', function () {
-    // return view('welcome');
-     $meals = Meal::all();
-    return view('adminpage', compact("meals"));
 
-})->name("adminpage");
+
+Route::get('/adminpage', function () {
+
+    if (!Auth::check() || Auth::user()->is_admin != 1) {
+        return redirect('/');
+    }
+
+    $meals = Meal::all();
+    return view('adminpage', compact('meals'));
+
+})->middleware('auth')->name('adminpage');
+
 
 
 Route::middleware(['guest'])->group(function () {
