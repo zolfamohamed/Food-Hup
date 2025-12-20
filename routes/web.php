@@ -8,14 +8,19 @@ use App\Http\Controllers\MealController;
 use Illuminate\Support\Facades\Auth;
 
 
+
 Route::get('/', function () {
-    if (!Auth::check() || Auth::user()->is_admin = 1) {
+
+    
+    if (Auth::check() && Auth::user()->is_admin == 1) {
         return redirect('/adminpage');
     }
-     $meals = Meal::all();
+
+
+    $meals = Meal::all();
     return view('index', compact('meals'));
 
-})->name("index");
+})->name('index');
 
 
 Route::get('/adminpage', function () {
